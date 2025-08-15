@@ -1,0 +1,12 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Deny direct client writes to washes; only Cloud Functions should write
+    match /washes/{washId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
+
+
